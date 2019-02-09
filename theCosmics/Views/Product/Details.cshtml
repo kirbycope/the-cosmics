@@ -1,0 +1,64 @@
+﻿@using theCosmics.Controllers
+@using theCosmics.Models
+
+@model theCosmics.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="12u">
+        <section>
+            <div>
+                <div class="row">
+                    <div class="8u skel-cell-important">
+                        <article class="box is-post">
+                            <a href="@Html.DisplayFor(model => model.TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ID } )' style="max-width: 627px;" /></a>
+                            <header>
+                                <h2>@Html.DisplayFor(model => model.ProductName)</h2>
+                                <span class="byline">@Html.DisplayFor(model => model.ProductHeader)</span>
+                            </header>
+                            <p>
+                                @Html.DisplayFor(model => model.LongDescription)
+                            </p>
+                            <a class="button big" href="@Html.DisplayFor(model => model.TrackingURL)">Buy for $@Html.DisplayFor(model => model.Price)</a>
+                        </article>
+
+                    </div>
+                    <div class="4u">
+                        <section class="box">
+                            <a href='@Url.Action("Index", "Blog", new { Category = Model.Category })' class="image image-full"><img src="/Images/blog.png" alt="" /></a>
+                            <header>
+                                <h3>View More Blogs for @Model.Category</h3>
+                            </header>
+                            <p>Click the image (above) or button (below) to browse all blog post in the same category as this article. Sorted newest to oldest.</p>
+                            <footer>
+                                <a href='@Url.Action("Index", "Blog", new { Category = Model.Category })' class="button alt">View More Posts</a>
+                            </footer>
+                        </section>
+                        <section class="box">
+                            <header>
+                                <h3>Top Products in @ViewBag.Category</h3>
+                            </header>
+                            <p>Below is a list of other popular products in the @ViewBag.Category category.</p>
+                            <ul class="divided">
+                                @{
+                                    IEnumerable<Product> products = new ProductController().TopProductsByCategory(@ViewBag.Category);
+                                    
+                                    foreach(var product in products)
+                                    {
+                                        <li><a href="/Product/Details/@product.ID">@product.ProductName</a></li>
+                                    }
+                                }
+                            </ul>
+                            <footer>
+                                <a href='@Url.Action("Index", @ViewBag.Category)' class="button alt">View All @ViewBag.Category</a>
+                            </footer>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

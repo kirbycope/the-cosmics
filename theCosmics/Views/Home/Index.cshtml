@@ -1,0 +1,201 @@
+﻿@using theCosmics.Controllers
+@using theCosmics.Models
+
+@{
+    ViewBag.Title = "Home Page";
+    //Layout = "~/Views/Home/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="12u">
+        <section>
+            <header class="major">
+                <h2>Featured Products</h2>
+            </header>
+            @{
+                IEnumerable<Product> Model = new ProductController().Featured();
+                
+                <div>
+                    <div class="row">
+                        @{
+                            if(Model.Count() > 0)
+                            {
+                                <div class="4u">
+                                    <section class="box">
+                                        <a href="@Html.DisplayFor(model => Model.ElementAt(0).TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ElementAt(0).ID } )' style="max-height: 255px;" /></a>
+                                        <header>
+                                            <h3>@Model.ElementAt(0).Category - @Model.ElementAt(0).ProductName</h3>
+                                        </header>
+                                        <p>@Html.DisplayFor(model => Model.ElementAt(0).ProductHeader)</p>
+                                        <footer>
+                                            <a href="/Product/Details/@Html.DisplayFor(modelItem => Model.ElementAt(0).ID)" class="button alt">Find out more</a>
+                                            <a href="@Html.DisplayFor(modelItem => Model.ElementAt(0).TrackingURL)" class="button">Buy for $@Html.DisplayFor(modelItem => Model.ElementAt(0).Price)</a>
+                                        </footer>
+                                    </section>
+                                </div>
+                            }
+                        }
+                        @{
+                            if (Model.Count() > 1)
+                            {
+                                <div class="4u">
+                                        <section class="box">
+                                            <a href="@Html.DisplayFor(model => Model.ElementAt(1).TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ElementAt(1).ID } )' style="max-height: 255px;" /></a>
+                                            <header>
+                                                <h3>@Model.ElementAt(1).Category - @Model.ElementAt(1).ProductName</h3>
+                                            </header>
+                                            <p>@Html.DisplayFor(model => Model.ElementAt(1).ProductHeader)</p>
+                                            <footer>
+                                                <a href="/Product/Details/@Html.DisplayFor(modelItem => Model.ElementAt(1).ID)" class="button alt">Find out more</a>
+                                                <a href="@Html.DisplayFor(modelItem => Model.ElementAt(1).TrackingURL)" class="button">Buy for $@Html.DisplayFor(modelItem => Model.ElementAt(1).Price)</a>
+                                            </footer>
+                                        </section>
+                                </div>
+                            }
+                        }
+                        @{
+                            if (Model.Count() > 2)
+                            {
+                                <div class="4u">
+                                    <section class="box">
+                                        <a href="@Html.DisplayFor(model => Model.ElementAt(2).TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ElementAt(2).ID } )' style="max-height: 255px;" /></a>
+                                        <header>
+                                            <h3>@Model.ElementAt(2).Category - @Model.ElementAt(2).ProductName</h3>
+                                        </header>
+                                        <p>@Html.DisplayFor(model => Model.ElementAt(2).ProductHeader)</p>
+                                        <footer>
+                                            <a href="/Product/Details/@Html.DisplayFor(modelItem => Model.ElementAt(2).ID)" class="button alt">Find out more</a>
+                                            <a href="@Html.DisplayFor(modelItem => Model.ElementAt(2).TrackingURL)" class="button">Buy for $@Html.DisplayFor(modelItem => Model.ElementAt(2).Price)</a>
+                                        </footer>
+                                    </section>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="row">
+                        @{
+                            if (Model.Count() > 3)
+                            {
+                                <div class="4u">
+                                    <section class="box">
+                                        <a href="@Html.DisplayFor(model => Model.ElementAt(3).TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ElementAt(3).ID } )' style="max-height: 255px;" /></a>
+                                        <header>
+                                            <h3>@Model.ElementAt(3).Category - @Model.ElementAt(3).ProductName</h3>
+                                        </header>
+                                        <p>@Html.DisplayFor(model => Model.ElementAt(3).ProductHeader)</p>
+                                        <footer>
+                                            <a href="/Product/Details/@Html.DisplayFor(modelItem => Model.ElementAt(3).ID)" class="button alt">Find out more</a>
+                                            <a href="@Html.DisplayFor(modelItem => Model.ElementAt(3).TrackingURL)" class="button">Buy for $@Html.DisplayFor(modelItem => Model.ElementAt(3).Price)</a>
+                                        </footer>
+                                    </section>
+                                </div>
+                            }
+                        }
+                        @{
+                            if (Model.Count() > 4)
+                            {
+                                <div class="4u">
+                                    <section class="box">
+                                        <a href="@Html.DisplayFor(model => Model.ElementAt(4).TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ElementAt(4).ID } )' style="max-height: 255px;" /></a>
+                                        <header>
+                                            <h3>@Model.ElementAt(4).Category - @Model.ElementAt(4).ProductName</h3>
+                                        </header>
+                                        <p>@Html.DisplayFor(model => Model.ElementAt(4).ProductHeader)</p>
+                                        <footer>
+                                            <a href="/Product/Details/@Html.DisplayFor(modelItem => Model.ElementAt(4).ID)" class="button alt">Find out more</a>
+                                            <a href="@Html.DisplayFor(modelItem => Model.ElementAt(4).TrackingURL)" class="button">Buy for $@Html.DisplayFor(modelItem => Model.ElementAt(4).Price)</a>
+                                        </footer>
+                                    </section>
+                                </div>
+                            }
+                        }
+                        @{
+                            if (Model.Count() > 5)
+                            {
+                                <div class="4u">
+                                    <section class="box">
+                                        <a href="@Html.DisplayFor(model => Model.ElementAt(5).TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ElementAt(5).ID } )' style="max-height: 255px;" /></a>
+                                        <header>
+                                            <h3>@Model.ElementAt(5).Category - @Model.ElementAt(5).ProductName</h3>
+                                        </header>
+                                        <p>@Html.DisplayFor(model => Model.ElementAt(5).ProductHeader)</p>
+                                        <footer>
+                                            <a href="/Product/Details/@Html.DisplayFor(modelItem => Model.ElementAt(5).ID)" class="button alt">Find out more</a>
+                                            <a href="@Html.DisplayFor(modelItem => Model.ElementAt(5).TrackingURL)" class="button">Buy for $@Html.DisplayFor(modelItem => Model.ElementAt(5).Price)</a>
+                                        </footer>
+                                    </section>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </section>
+
+    </div>
+</div>
+<div class="row">
+    <div class="12u">
+
+        <!-- Blog -->
+        <section>
+            <header class="major">
+                <h2>The Blog</h2>
+            </header>
+            <div>
+                <div class="row">
+                    <div class="6u">
+                        @{
+                            Blog TimBlog = new BlogController().GetTopBlogPost("Tim");
+                            
+                            <section class="box">
+                                <a href='@Url.Action("Post/" + TimBlog.ID, "Blog")' class="image image-full"><img src="/Images/ttb.png" alt="" /></a>
+                                <header>
+                                    <h3>@TimBlog.Title</h3>
+                                    <span class="byline">Posted @TimBlog.Created</span>
+                                </header>
+                                @if(@TimBlog.Body.Length > 140)
+                                {
+                                    <p>@TimBlog.Body.Substring(0, 140) ...</p>
+                                }
+                                else
+                                {
+                                    <p>@TimBlog.Body</p>
+                                }
+                                <footer class="actions">
+                                    <a href='@Url.Action("Post/" + TimBlog.ID, "Blog")' class="button fa fa-file-text">Continue Reading</a>
+                                    <!--<a href="#" class="button alt fa fa-comment">33 comments</a>-->
+                                </footer>
+                            </section>
+                        }
+                    </div>
+                    <div class="6u">
+                        @{
+                            Blog JessBlog = new BlogController().GetTopBlogPost("Jess");
+                            
+                            <section class="box">
+                                <a href='@Url.Action("Post/" + JessBlog.ID, "Blog")' class="image image-full"><img src="/Images/jtb.jpg" alt="" /></a>
+                                <header>
+                                    <h3>@JessBlog.Title</h3>
+                                    <span class="byline">Posted @JessBlog.Created</span>
+                                </header>
+                                @if(@JessBlog.Body.Length > 140)
+                                {
+                                    <p>@JessBlog.Body.Substring(0, 100) ...</p>
+                                }
+                                else
+                                {
+                                    <p>@JessBlog.Body</p>
+                                }
+                                <footer class="actions">
+                                    <a href='@Url.Action("Post/" + JessBlog.ID, "Blog")' class="button fa fa-file-text">Continue Reading</a>
+                                    <!--<a href="#" class="button alt fa fa-comment">33 comments</a>-->
+                                </footer>
+                            </section>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

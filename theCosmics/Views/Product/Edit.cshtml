@@ -1,0 +1,99 @@
+﻿@model theCosmics.Models.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Product</h2>
+
+@using (Html.BeginForm("Edit", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+
+        @Html.HiddenFor(model => model.ID)
+
+        @* Existing image data *@
+        @Html.Hidden("ImageData", Model.ImageData)
+        @Html.Hidden("ImageMimeType", Model.ImageMimeType)
+
+        <h1>@Html.LabelFor(model => model.Category)</h1>
+        <div>
+            @Html.EditorFor(model => model.Category)
+            @Html.ValidationMessageFor(model => model.Category)
+        </div>
+        <h1>@Html.LabelFor(model => model.Featured)</h1>
+        <div>
+            @Html.EditorFor(model => model.Featured)
+            @Html.ValidationMessageFor(model => model.Featured)
+        </div>
+        <h1>@Html.LabelFor(model => model.ProductName)</h1>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductName)
+            @Html.ValidationMessageFor(model => model.ProductName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductHeader)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductHeader)
+            @Html.ValidationMessageFor(model => model.ProductHeader)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LongDescription)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.LongDescription, new { style = "width: 50%; height: 200px;" })
+            @Html.ValidationMessageFor(model => model.LongDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TrackingURL)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TrackingURL)
+            @Html.ValidationMessageFor(model => model.TrackingURL)
+        </div>
+
+        <div>
+            <label>Image</label>
+        </div>
+        <div>
+            <img src='@Url.Action("GetImage", "Product", new { id = Model.ID } )' width="256" height="256" />
+        </div>
+
+        <div>
+            <label>Upload New Image</label>
+            <input type="file" name="Image" />
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Hits)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Hits)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "List", new { Category = Model.Category } )
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

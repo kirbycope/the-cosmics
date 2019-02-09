@@ -1,0 +1,106 @@
+﻿@model Tuple<IEnumerable<theCosmics.Models.Product>, IEnumerable<string>>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<ul id="tabs">
+    @{
+        // Show an "All" tab
+        if ( (ViewBag.Category == null) || (ViewBag.Category == "All"))
+        {
+            <li id="current">@Html.ActionLink("All", "Product", "Admin", new { Category = "All" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("All", "Product", "Admin", new { Category = "All" }, null)</li>
+        }
+
+        // Show each Category in a tab
+        int counter = 0;
+        foreach (var item in @Model.Item2)
+        {
+            if (ViewBag.Category == @Model.Item2.ElementAt(counter))
+            {
+                <li id="current">@Html.ActionLink(@Model.Item2.ElementAt(counter).ToString(), "Product", "Admin", new { Category = @Model.Item2.ElementAt(counter).ToString() }, null)</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink(@Model.Item2.ElementAt(counter).ToString(), "Product", "Admin", new { Category = @Model.Item2.ElementAt(counter).ToString() }, null)</li>
+            }
+            counter++;
+        }
+    }
+</ul>
+
+<div class="box">
+    <p>
+        <a href="@Url.Action("Create", "Product", new { Category = @ViewBag.Category } )" class="button fa fa-file-text">Create New</a>
+    </p>
+    <p>
+        <b>@ViewBag.Category Products</b>
+    </p>
+    <table>
+        <tr>
+            <th>
+                Category
+            </th>
+            <th>
+                ProductName
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                ProductHeader
+            </th>
+            <th>
+                LongDescription
+            </th>
+            <th>
+                TrackingURL
+            </th>
+            <th>Image</th>
+            <th>
+                Hits
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model.Item1)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductHeader)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LongDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrackingURL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageMimeType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hits)
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", "Product", new { id = item.ID }, null) |
+                    @Html.ActionLink("Edit", "Edit", "Product", new { id = item.ID }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Product", new { id = item.ID }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

@@ -1,0 +1,97 @@
+﻿@model Tuple<IEnumerable<theCosmics.Models.Blog>, IEnumerable<string>>
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<ul id="tabs">
+    @{
+        // Show an "All" tab
+        if ( (ViewBag.Category == null) || (ViewBag.Category == "All") )
+        {
+            <li id="current">@Html.ActionLink("All", "Blog", "Admin", new { Category = "All" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("All", "Blog", "Admin", new { Category = "All" }, null)</li>
+        }
+
+        // Show each Category in a tab
+        int counter = 0;
+        foreach (var item in @Model.Item2)
+        {
+            if (ViewBag.Category == @Model.Item2.ElementAt(counter))
+            {
+                <li id="current">@Html.ActionLink(@Model.Item2.ElementAt(counter).ToString(), "Blog", "Admin", new { Category = @Model.Item2.ElementAt(counter).ToString() }, null)</li>
+            }
+            else
+            {
+                <li>@Html.ActionLink(@Model.Item2.ElementAt(counter).ToString(), "Blog", "Admin", new { Category = @Model.Item2.ElementAt(counter).ToString() }, null)</li>
+            }
+            counter++;
+        }
+    }
+</ul>
+
+<div class="box">
+    <p>
+        <a href="@Url.Action("Create", "Blog", new { Category = @ViewBag.Category } )" class="button fa fa-file-text">Create New</a>
+    </p>
+    <p>
+        <b>@ViewBag.Category Blogs</b>
+    </p>
+    <table>
+        <tr>
+            <th>
+                Category
+            </th>
+            <th>
+                Hits
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
+                Body
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model.Item1)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hits)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Body)
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Post", "Blog", new { id = item.ID }, null) |
+                    @Html.ActionLink("Edit", "Edit", "Blog", new { id = item.ID }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Blog", new { id = item.ID }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

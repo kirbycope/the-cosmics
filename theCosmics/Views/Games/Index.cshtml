@@ -1,0 +1,50 @@
+﻿@model IEnumerable<theCosmics.Models.Product>
+
+<div class="row">
+    <div class="12u">
+        <section>
+            <header class="major">
+                <h2>@ViewBag.CurrentPage</h2>
+            </header>
+            <div>
+                <div class="row">
+                    @{
+                        int counter = 0;
+                        foreach (var item in Model)
+                        {
+                        <div class="4u">
+                            <section class="box">
+                                <a href="@Html.DisplayFor(modelItem => item.TrackingURL)" class="image image-full"><img src='@Url.Action("GetImage", "Product", new { id = Model.ElementAt(counter).ID })' style="max-height: 260px; max-width: 367px;" /></a>
+                                <header>
+                                    <h3>@Html.DisplayFor(modelItem => item.ProductName)</h3>
+                                </header>
+                                <p>@Html.DisplayFor(modelItem => item.ProductHeader)</p>
+                                <footer>
+                                    <a href="/Product/Details/@Html.DisplayFor(modelItem => item.ID)" class="button alt">Find out more</a>
+                                    <a href="@Html.DisplayFor(modelItem => item.TrackingURL)" class="button">Buy for $@Html.DisplayFor(modelItem => item.Price)</a>
+                                </footer>
+                            </section>
+                        </div>
+                        counter++;
+                        }
+                    }
+                </div>
+                <div class="actions">
+                    @{
+                        // If there were products skipped, then show the 'previous' page button
+                        if (ViewBag.Skip > 0)
+                        {
+                            <a href="@Url.Action("Index", @ViewBag.CurrentPage, new { skip = (ViewBag.Skip - 9) })" style="float:left; " class="button alt big">Previous</a>
+                        }
+
+                        // If the (Product count divided by 9) - the skip count is greater than 0, then show the next link
+                        if (((ViewBag.ProductCount / 9) - ViewBag.Skip) > 0)
+                        {
+                            <a href="@Url.Action("Index", @ViewBag.CurrentPage, new { skip = (ViewBag.Skip + 9) })" style="float:right;" class="button big">Next</a>
+                        }
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

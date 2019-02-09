@@ -1,0 +1,210 @@
+﻿@model IEnumerable<theCosmics.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<ul id="tabs">
+    @{
+        if (ViewBag.Category == "Apparel")
+        {
+            <li id="current">@Html.ActionLink("Apparel", "List", "Product", new { Category = "Apparel" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Apparel", "List", "Product", new { Category = "Apparel" }, null)</li>
+        }
+        if (ViewBag.Category == "Comics")
+        {
+            <li id="current">@Html.ActionLink("Comics", "List", "Product", new { Category = "Comics" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Comics", "List", "Product", new { Category = "Comics" }, null)</li>
+        }
+        if (ViewBag.Category == "Gadgets")
+        {
+            <li id="current">@Html.ActionLink("Gadgets", "List", "Product", new { Category = "Gadgets" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Gadgets", "List", "Product", new { Category = "Gadgets" }, null)</li>
+        }
+        if (ViewBag.Category == "Games")
+        {
+            <li id="current">@Html.ActionLink("Games", "List", "Product", new { Category = "Games" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Games", "List", "Product", new { Category = "Games" }, null)</li>
+        }
+        if (ViewBag.Category == "Movies")
+        {
+            <li id="current">@Html.ActionLink("Movies", "List", "Product", new { Category = "Movies" }, null)</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Movies", "List", "Product", new { Category = "Movies" }, null)</li>
+        }
+    }
+</ul>
+
+<div class="box">
+    <p>
+        <a href="@Url.Action("Create")" class="button fa fa-file-text">Create New</a>
+    </p>
+    @{
+        int FeaturedCount = 0;
+        int counter = 0;
+        foreach (var item in Model)
+        {
+            if(item.Featured==true)
+            {
+                FeaturedCount++;
+            }
+            counter++;
+        }
+    }
+    @{
+        if(FeaturedCount > 1)
+        {
+            <div class="warning">
+                <b>Warning:</b> There is than one product in @ViewBag.Category set to 'Featured'.
+            </div>  
+        }
+    }
+    <p>
+        <b>Featured @ViewBag.Category Product</b>
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductHeader)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LongDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackingURL)
+            </th>
+            <th>Image</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hits)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            if (item.Featured == true)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductHeader)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LongDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TrackingURL)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageMimeType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hits)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <p>
+        <b>All @ViewBag.Category Products</b>
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductHeader)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LongDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrackingURL)
+            </th>
+            <th>Image</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hits)
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductHeader)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LongDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrackingURL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageMimeType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hits)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

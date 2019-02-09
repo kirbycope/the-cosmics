@@ -1,0 +1,80 @@
+﻿@using theCosmics.Controllers
+@using theCosmics.Models
+
+@model Tuple<IEnumerable<string>, IEnumerable<string>>
+
+@{
+    ViewBag.Title = "Blog";
+}
+
+<div class="row">
+    <div class="12u">
+        <section>
+            <div>
+                <div class="row">
+                    <div class="8u skel-cell-important">
+                        <article class="box is-post">
+                            <img src="/Images/jess.png">
+                            <header>
+                                <h1>Featured Blogger</h1>
+                                <h2>Jess</h2>
+                            </header>
+                            <p>
+                                Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nisi eros, vestibulum eget velit ac, eleifend facilisis tortor. Curabitur convallis nunc ac tellus imperdiet, dictum gravida tellus porta. Suspendisse faucibus viverra elit, a molestie est feugiat nec. Proin faucibus dapibus dolor nec semper. Sed at fringilla sem. Praesent interdum purus lacus, eu egestas metus tincidunt non. Maecenas nec suscipit lacus. Fusce aliquet lorem eget magna condimentum, ac porttitor sapien sodales. Aenean iaculis metus et ante elementum mattis in non justo.
+                            </p>
+                            <p>
+                                <b>Posted Categories:</b>
+                                <ul>
+                                    @foreach (var category in Model.Item1)
+                                    {
+                                        <li>@Html.ActionLink(category, "Index", "Blog", new { Category = category })</li>
+                                    }
+                                </ul>
+                            </p>
+                        </article>
+                        <article class="box is-post">
+                            <img src="/Images/tim.png">
+                            <header>
+                                <h1>Featured Blogger</h1>
+                                <h2>Tim</h2>
+                            </header>
+                            <p>
+                                Description: Curabitur dui sem, interdum eget mi sit amet, viverra condimentum sem. Fusce molestie pharetra mauris, non lacinia felis sagittis vitae. Morbi molestie, ligula placerat iaculis luctus, ante augue tincidunt orci, non vehicula neque massa vel sem. Ut rhoncus pulvinar tristique. Cras dapibus dolor felis, eget rutrum nunc blandit ultricies. Maecenas ac urna est. Fusce urna lectus, porta sed augue in.
+                            </p>
+                                <p>
+                                    <b>Posted Categories:</b>
+                                    <ul>
+                                        @foreach (var category in Model.Item2)
+                                        {
+                                            <li>@Html.ActionLink(category, "Index", "Blog", new { Category = category })</li>
+                                        }  
+                                    </ul>
+                                </p>
+                        </article>
+                    </div>
+                    <div class="4u">
+                        <section class="box">
+                            <header>
+                                <h3>Top Blog Categories</h3>
+                            </header>
+                            <p>We have an open policy for when it comes what to write in our blog posts. You can browse the many categories below.</p>
+                            <ul class="divided">
+                                @{
+                                    IEnumerable<TopCategoryModel> Categories = new BlogController().TopBlogCategories();
+
+                                    foreach (var row in Categories)
+                                    {
+                                        <li>@Html.ActionLink(row.Category, "Index", "Blog", new { Category = row.Category }, null)</li>
+                                    }
+                                }
+                            </ul>
+                            <footer>
+                                <a href='@Url.Action("Index", "Blog", new { Category = "All" })' class="button alt">View All Blog Posts</a>
+                            </footer>
+                        </section>
+                    </div>                   
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

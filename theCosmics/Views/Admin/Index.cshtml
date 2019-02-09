@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="row">
+    <div class="12u">
+        <section id="intro" style="background: #fff;">
+            <p style="text-align: center;"><h2 style="border-style: solid; border-bottom-color: #000; border-bottom-width: thin;">@ViewBag.Title</h2></p>
+        </section>
+    </div>
+</div>
+<div class="row">
+    <div class="12u" style="padding-top: 0;">
+        <section id="intro" style="background: #fff; margin-bottom: 0;">
+            <div>
+                <div class="row">
+                    <div class="4u">
+                        <section class="first">
+                            <span class="pennant">
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Apparel" })'><span class="fa fa-male"></span></a>
+                            </span>
+                            <header>
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Apparel" })' style="text-decoration: none;"><h2>Apparel</h2></a>
+                            </header>
+                        </section>
+                    </div>
+                    <div class="4u">
+                        <section class="middle" style="box-shadow: none;">
+                            <span class="pennant pennant-alt">
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Comics" })'><span class="fa fa-book"></span></a>
+                            </span>
+                            <header>
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Comics" })' style="text-decoration: none;"><h2>Comics</h2></a>
+                            </header>
+                        </section>
+                    </div>
+                    <div class="4u">
+                        <section class="last">
+                            <span class="pennant pennant-alt2">
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Gadgets" })'><span class="fa fa-tablet"></span></a>
+                            </span>
+                            <header>
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Gadgets" })' style="text-decoration: none;"><h2>Gadgets</h2></a>
+                            </header>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="intro" style="background: #fff;">
+            <div>
+                <div class="row">
+                    <div class="4u">
+                        <section class="first">
+                            <span class="pennant">
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Games" })'><span class="fa fa-puzzle-piece"></span></a>
+                            </span>
+                            <header>
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Games" })' style="text-decoration: none;"><h2>Games</h2></a>
+                            </header>
+                        </section>
+                    </div>
+                    <div class="4u">
+                        <section class="middle" style="box-shadow: none;">
+                            <span class="pennant pennant-alt">
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Movies" })'><span class="fa fa-film"></span></a>
+                            </span>
+                            <header>
+                                <a href='@Url.Action("Product", "Admin", new { Category = "Movies" })' style="text-decoration: none;"><h2>Movies</h2></a>
+                            </header>
+                        </section>
+                    </div>
+                    <div class="4u">
+                        <section class="last">
+                            <span class="pennant pennant-alt2">
+                                <a href='@Url.Action("Blog", "Admin", null)'><span class="fa fa-rss"></span></a>
+                            </span>
+                            <header>
+                                <a href='@Url.Action("Blog", "Admin", null)' style="text-decoration: none;"><h2>Blog</h2></a>
+                            </header>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

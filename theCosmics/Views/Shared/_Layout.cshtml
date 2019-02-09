@@ -1,0 +1,222 @@
+﻿@using theCosmics.Controllers
+@using theCosmics.Models
+@using System.Text.RegularExpressions
+
+<!DOCTYPE html>
+<!--
+    Dopetrope 2.5 by HTML5 UP
+    html5up.net | (at)n33co
+    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+<head>
+    <title>@ViewBag.CurrentPage - theCosmics</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="@ViewBag.Description" />
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic" rel="stylesheet" />
+    <script src="/Scripts/jquery.min.js"></script>
+    <script src="/Scripts/jquery.dropotron.min.js"></script>
+    <script src="/Scripts/config.js"></script>
+    <script src="/Scripts/skel.min.js"></script>
+    <script src="/Scripts/skel-panels.min.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="/Content/skel-noscript.css" />
+        <link rel="stylesheet" href="/Content/style.css" />
+        <link rel="stylesheet" href="/Content/style-desktop.css" />
+    </noscript>
+    <!--[if lte IE 8]><script src="Scripts/html5shiv.js"></script><link rel="stylesheet" href="Content/ie8.css" /><![endif]-->
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+@{
+    string currentPage = @ViewBag.CurrentPage.ToLower();
+}
+<body class="homepage" id="@currentPage">
+    <!-- Header Wrapper -->
+    <div id="header-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+                    <!-- Header -->
+                    <section id="header">
+                        <!-- Logo -->
+                        <h1><a href="/">theCosmics</a></h1>
+                        <!-- Nav -->
+                        <nav id="nav">
+                            <ul>
+                                <li>@Html.ActionLink("Home", "Index", "Home", null, new { @id = "home" })</li>
+                                <li>@Html.ActionLink("Blog", "Index", "Blog", null, new { @id = "blog" })</li>
+                                <li>@Html.ActionLink("Apparel", "Index", "Apparel", null, new { @id = "apparel" })</li>
+                                <li>@Html.ActionLink("Comics", "Index", "Comics", null, new { @id = "comics" })</li>
+                                <li>@Html.ActionLink("Gadgets", "Index", "Gadgets", null, new { @id = "gadgets" })</li>
+                                <li>@Html.ActionLink("Games", "Index", "Games", null, new { @id = "games" })</li>
+                                <li>@Html.ActionLink("Movies", "Index", "Movies", null, new { @id = "movies" })</li>
+                            </ul>
+                        </nav>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- Footer Wrapper -->
+    <div id="footer-wrapper">
+        <!-- Footer -->
+        <section id="footer" class="container">
+            <div class="row">
+                <div class="8u">
+                    <section>
+                        <header>
+                            <h2>Latest Blog Posts</h2>
+                        </header>
+                        <ul class="dates">
+                            @{
+                                IEnumerable<Blog> posts = new BlogController().LatestPosts();
+                                
+                                foreach(var post in posts)
+                                {
+                                    <li>
+                                    <span class="date">@post.Created.ToString("MMM") <strong>@post.Created.Day</strong></span>
+                                    <h3><a href='/Blog/Post/@post.ID'>@post.Title</a></h3>
+                                    @if(post.Body.Length > 100)
+                                    {
+                                        <p>@post.Body.Substring(0, 100) ...</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@post.Body</p>
+                                    }
+                                </li>
+                                }
+                            }
+                        </ul>
+                    </section>
+
+                </div>
+                <div class="4u">
+
+                    <section>
+                        <header>
+                            <h2>Put Ad Here?</h2>
+                        </header>
+                        <a href="http://facebook.com/DreametryDoodle" class="image image-full"><img src="/Images/pic10.jpg" alt="" /></a>
+                        <p>
+                            This is <a href="http://html5up.net/dopetrope/">Dopetrope</a> a free, fully responsive HTML5 site template by
+                            <a href="http://n33.co">AJ</a> for <a href="http://html5up.net/">HTML5 UP</a> It's released for free under
+                            the <a href="http://html5up.net/license/">CCA</a> license so feel free to use it for any personal or commercial project &ndash;
+                            just don't forget to credit us! <strong>PS:</strong> The awesome placeholder artwork used in this design is courtesy of <a href="http://facebook.com/DreametryDoodle/">Dreametry Doodle</a>.
+                        </p>
+                        <footer>
+                            <a href="#" class="button">Find out more</a>
+                        </footer>
+                    </section>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="4u">
+
+                    <section>
+                        <header>
+                            <h2>Top Blog Categories</h2>
+                        </header>
+                        <ul class="divided">
+                            @{
+                                IEnumerable<TopCategoryModel> categories = new BlogController().TopBlogCategories();
+                                
+                                foreach(var row in categories)
+                                {
+                                    <li><a href="/Blog/Index?Category=@row.Category">@row.Category</a></li>
+                                }
+                            }
+                        </ul>
+                    </section>
+
+                </div>
+                <div class="4u">
+
+                    <section>
+                        <header>
+                            <h2>Top Products</h2>
+                        </header>
+                        <ul class="divided">
+                            @{
+                                IEnumerable<Product> products = new ProductController().TopProducts();
+                                
+                                foreach(var product in products)
+                                {
+                                    <li><a href="/Product/Details/@product.ID">@product.ProductName</a></li>
+                                }
+                            }
+                        </ul>
+                    </section>
+
+                </div>
+                <div class="4u">
+
+                    <section>
+                        <header>
+                            <h2>Social Contact Info</h2>
+                        </header>
+                        <ul class="social">
+                            <li><a class="fa fa-facebook solo" href="http://www.facebook.com"><span>Facebook</span></a></li>
+                            <li><a class="fa fa-twitter solo" href="http://www.twitter.com"><span>Twitter</span></a></li>
+                            <li><a class="fa fa-dribbble solo" href="http://www.dribble.com"><span>Dribbble</span></a></li>
+                            <li><a class="fa fa-linkedin solo" href="http://www.linkedin.com"><span>LinkedIn</span></a></li>
+                            <li><a class="fa fa-google-plus solo" href="http://www.google.com/plus"><span>Google+</span></a></li>
+                        </ul>
+                        <ul class="contact">
+                            @*
+                            <li>
+                                <h3>Address</h3>
+                                <p>
+                                    Untitled Incorporated<br />
+                                    1234 Somewhere Road Suite #5432<br />
+                                    Nashville, TN 00000-0000
+                                </p>
+                            </li>
+                            *@
+                            <li>
+                                <h3>Mail</h3>
+                                <p><a href="mailto:contact@thecosmics.com">contact@thecosmics.com</a></p>
+                            </li>
+                            @*
+                            <li>
+                                <h3>Phone</h3>
+                                <p>(800) 867-5309</p>
+                            </li>
+                            *@
+                        </ul>
+                    </section>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="12u">
+
+                    <!-- Copyright -->
+                    <div id="copyright">
+                        <ul class="links">
+                            <li>&copy; @DateTime.Now.Year - theCosmics	</li>
+                            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
